@@ -1,0 +1,1 @@
+Build the best token launch radar site for bounty token-radar-01: a polished, functional web app that tracks and ranks new token launches with filters, sorting, token detail views, and risk signals. Follow the kit RULES.txt exactly for deliverables and screenshots. Grade and check locally with the kit before submitting.

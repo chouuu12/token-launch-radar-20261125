@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocol launches, ranked</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="pulse" aria-hidden="true"></div>
+    <div>
+      <h1>TOKEN RADAR</h1>
+      <p class="tag">Every protocol that records no token yet, ranked by what its token would be worth.</p>
+    </div>
+  </div>
+  <div class="meta" id="meta">Loading snapshot…</div>
+</header>
+
+<main>
+  <section class="stats" id="stats" aria-label="Snapshot summary"></section>
+
+  <section class="controls" aria-label="Filter and sort">
+    <input id="q" type="search" placeholder="Search name or slug…" autocomplete="off">
+    <select id="category" aria-label="Category"><option value="">All categories</option></select>
+    <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+    <select id="sort" aria-label="Sort by">
+      <option value="rank">Sort: rank (implied value)</option>
+      <option value="tvl">Sort: TVL, high to low</option>
+      <option value="growth">Sort: 7-day growth</option>
+      <option value="age">Sort: longest tracked</option>
+      <option value="name">Sort: name A–Z</option>
+    </select>
+    <label class="check"><input id="watchlist" type="checkbox"> Watchlist only</label>
+    <button id="reset" type="button">Reset</button>
+  </section>
+
+  <p class="count" id="count"></p>
+
+  <section id="detail" class="detail" hidden></section>
+
+  <section class="board-wrap">
+    <table class="board" id="board">
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th>Protocol</th>
+          <th>Category</th>
+          <th>Chains</th>
+          <th class="num">TVL</th>
+          <th class="num">7d</th>
+          <th class="num">Tracked</th>
+          <th class="num">Implied value</th>
+          <th class="num">Multiple</th>
+          <th>Signals</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="pager">
+      <button id="more" type="button">Show more</button>
+      <span id="shown"></span>
+    </div>
+  </section>
+
+  <section class="live" id="live" aria-label="Protocols whose token already trades"></section>
+
+  <section class="method" aria-label="How the value is computed">
+    <h2>How the implied value is computed</h2>
+    <p>Implied value = TVL × multiple. The multiple starts at 0.45× and moves with the snapshot's own
+    figures: seven-day TVL change (clamped to −25%…+60%), how long the protocol has run with no token
+    (+12% a year, up to five years), how many chains it runs on (+3% a chain, up to nine), and a small
+    category weight (lending and exchange venues monetise TVL most directly; bridges and centralised
+    venues are discounted). Before scoring, the house watchlist's exclusion rule applies as a filter:
+    centralised exchanges, wrapped or staked products of a token that already trades, bridges and
+    versioned copies never reach the board — the largest of them are listed under "set aside" with the
+    reason, so the judgement is visible instead of silent. The result is clamped to 0.12×–1.60×. No protocol name is hardcoded: the
+    same formula scores all 758 protocols, and the board ranks only the ones that record no token.</p>
+    <p>Implied value is this radar's claim, never a prediction. It does not say whether or when a
+    token is issued. Farm plans are positioning for a launch that may never come: size every step
+    as money you are fine losing.</p>
+  </section>
+</main>
+
+<footer>
+  <p id="foot"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
